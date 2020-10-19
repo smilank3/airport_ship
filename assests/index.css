@@ -1,0 +1,40 @@
+html{
+	font-family: Georgia;
+}
+
+body{
+font-family: 'Georgia';
+}
+#_Container{
+	width:100%;
+	max-width: 1070px;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin: 0 auto;
+	position: relative;
+
+
+
+
+}
+
+#main_container{
+		flex:1 1 auto;
+
+}
+
+@media screen and (max-width: 1200px){
+	#_Container{
+		max-width: 970px;
+		
+	}
+}
+
+#nav{
+	padding: 8px 0px;
+}
+@media screen and (max-width: 670px){
+	#nav{
+		padding:0px 0px;
+	}
+}

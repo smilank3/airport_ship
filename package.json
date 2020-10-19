@@ -1,0 +1,33 @@
+{
+  "name": "airport_pro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/styles": "^4.10.0",
+    "@zeit/next-css": "^1.0.1",
+    "bcrypt": "^5.0.0",
+    "bootstrap": "^4.5.3",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "next": "^9.5.5",
+    "next-compose-plugins": "^2.2.0",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.3.0",
+    "react-dom": "^16.13.1",
+    "react-flexbox-grid": "^2.1.2",
+    "react-icons": "^3.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "demon": "nodemon server/app.js --watch server",
+    "build": "next build",
+    "heroku-postbuild": "next build",
+    "start": "node server/app.js -p $PORT"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
