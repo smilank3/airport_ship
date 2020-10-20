@@ -1,7 +1,7 @@
 
 
 
-import {Container} from 'react-bootstrap'
+import Container from '../Container/Container'
 import Navigation from '../navigation'
 import Footer from '../footer'
 
@@ -16,12 +16,12 @@ const Layout=(props)=>{
 		</nav>
 		
 
-			<Container style={{marginTop:"80px"}}>
+			<Container style={{marginTop:"80px",minHeight:'calc(100vh-60px)'}}>
 				{props.children}
 			</Container>
 
 
-			<Footer/>
+			
 		</div>)
 }
 

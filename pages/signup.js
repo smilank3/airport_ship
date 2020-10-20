@@ -23,9 +23,7 @@ const signUp = () => {
         <meta name="Login page" content="login page" />
       </Head>
 
-    
-
-              <h1>Sign in</h1>
+  
               <SignUpComp />
      
 

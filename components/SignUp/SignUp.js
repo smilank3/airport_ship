@@ -1,24 +1,30 @@
-// www/pages/login.js
-
 import {Component} from 'react';
 
-import Link from 'next/link';
+import {Form,Button,Col,Row} from 'react-bootstrap'
 
-class SignupForm extends Component {
+import states from './states'
+
+
+export default class SignUp extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      platformName: '',
-      firstName: '',
-      lastName: '',
       email: '',
       password: '',
       error: '',
+      name:'',
+      phone:'',
+      address:'',
+      zip:'',
+      apt:'',
+      city:'',
+      
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
   }
 
   handleChange(event) {
@@ -31,106 +37,78 @@ class SignupForm extends Component {
     });
   }
 
+
+
   async handleSubmit(event) {
     event.preventDefault();
-
-  
+   
   }
 
   render() {
     return (
       <>
-        <div className="signup-form">
-          <form onSubmit={this.handleSubmit}>
-         
-            <input
-              className="new-section name"
-              type="text"
-              id="firstName"
-              name="firstName"
-              placeholder="First name"
-              value={this.state.firstName}
-              onChange={this.handleChange}
-              required
-            />
+      <div style={{border:'',maxWidth:'',padding:'10px',display:'flex',justifyContent:'center',minWidth:''}}>
+        <Form>
 
-            <input
-              className="name"
-              type="text"
-              id="lastName"
-              name="lastName"
-              placeholder="Last name"
-              value={this.state.lastName}
-              onChange={this.handleChange}
-              required
-            />
+          <Form.Group controlId="formBasicPassword">
+    <Form.Label>Name</Form.Label>
+    <Form.Control type="text" size="sm" placeholder="" />
+  </Form.Group>
+  <Form.Group controlId="formBasicEmail">
+    <Form.Label>Email address</Form.Label>
+    <Form.Control type="email" placeholder="" size="sm"/>
+  
+  </Form.Group>
 
-            <input
-              className="email"
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Email"
-              value={this.state.email}
-              onChange={this.handleChange}
-              required
-            />
+  <Form.Group controlId="formBasicPassword">
+    <Form.Label>Password</Form.Label>
+    <Form.Control type="password" size="sm" placeholder="" />
+  </Form.Group>
+ 
+  <Form.Group controlId="formBasicPassword">
+    <Form.Label>Phone</Form.Label>
+    <Form.Control type="password" size="sm" placeholder="" />
+  </Form.Group>
 
-            <input
-              className="password"
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              required
-            />
 
-            <button type="submit" className="btn btn-primary btn-full">
-              Create platform
-            </button>
+    <Form.Group controlId="formBasicPassword">
+    <Form.Label>Address</Form.Label>
+    <Form.Control type="password" size="sm" placeholder="street Address" style={{marginBottom:'10px'}} />
+    <Form.Control type="password" size="sm" placeholder="Apartment, suite, unit, building, floor, etc"  style={{marginBottom:'10px'}} />
+    <Form.Control type="password" size="sm" placeholder="Department, c/o, etc." />
+  </Form.Group>
 
-            <p className={`error ${this.state.error && 'show'}`}>
-              {this.state.error && `Error: ${this.state.error}`}
-            </p>
-          </form>
-        </div>
-        <style jsx>{`
-          .new-section {
-            margin-top: 16px;
-          }
 
-          .email {
-            background: url(../email.svg) no-repeat scroll 7px 6px;
-            background-size: 20px 20px;
-            background-position: 16px 14px;
-          }
+  <Form.Row>
+    <Form.Group as={Col} controlId="formGridCity">
+      <Form.Label>City</Form.Label>
+      <Form.Control size="sm"/>
+    </Form.Group>
 
-          .name {
-            background: url(../person.svg) no-repeat scroll 7px 6px;
-            background-size: 20px 20px;
-            background-position: 16px 14px;
-          }
+    <Form.Group as={Col} controlId="formGridState">
+      <Form.Label>State</Form.Label>
+      <Form.Control as="select" defaultValue="Choose..." size="sm">
+        <option>Choose...</option>
+        {states.map((s,i)=>(
+          <option value={`${s}`} key={i}>{s}</option>))}
+        <option>...</option>
+      </Form.Control>
+    </Form.Group>
 
-          .password {
-            background: url(../lock.svg) no-repeat scroll 7px 6px;
-            background-size: 20px 20px;
-            background-position: 16px 14px;
-          }
+    <Form.Group as={Col} controlId="formGridZip" size="sm">
+      <Form.Label>Zip</Form.Label>
+      <Form.Control />
+    </Form.Group>
+  </Form.Row>
 
-          .error {
-            margin: 0.5rem 0 0;
-            display: none;
-            color: brown;
-          }
-          .error.show {
-            display: block;
-          }
-        `}</style>
+
+  
+  <Button variant="primary" size="sm" type="submit">
+    Submit
+  </Button>
+</Form>
+</div>
       </>
     );
   }
 }
-
-export default SignupForm;

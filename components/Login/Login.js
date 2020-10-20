@@ -2,7 +2,7 @@
 
 import {Component} from 'react';
 
-
+import {Form,Button} from 'react-bootstrap'
 export default class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +15,7 @@ export default class LoginForm extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.loginAsDemo = this.loginAsDemo.bind(this);
+
   }
 
   handleChange(event) {
@@ -28,12 +28,7 @@ export default class LoginForm extends Component {
     });
   }
 
-  loginAsDemo() {
-    this.setState({
-      email: 'shop@missioncoffee.com',
-      password: 'test',
-    });
-  }
+
 
   async handleSubmit(event) {
     event.preventDefault();
@@ -43,68 +38,24 @@ export default class LoginForm extends Component {
   render() {
     return (
       <>
-        <div className="login">
-          <p className="supporting-text">
-            You can sign in with your own account, or our demo account.
-          </p>
-          <form onSubmit={this.handleSubmit}>
-       
+      <div style={{border:'',maxWidth:'',padding:'10px',display:'flex',justifyContent:'center',width:'100%'}}>
+        <Form>
+  <Form.Group controlId="formBasicEmail">
+    <Form.Label>Email address</Form.Label>
+    <Form.Control type="email" placeholder="Enter email" size="sm"/>
+   
+  </Form.Group>
 
-            <input
-              className="icon-input new-section email"
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-            <input
-              className="icon-input password"
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-
-            <button type="submit" className="btn btn-primary btn-full">
-              Sign in
-            </button>
-
-            <p className={`error ${this.state.error && 'show'}`}>
-              {this.state.error && `Error: ${this.state.error}`}
-            </p>
-          </form>
-        </div>
-        <style jsx>{`
-          .new-section {
-            margin-top: 16px;
-          }
-
-          .email {
-            background: url(/email.svg) no-repeat scroll 7px 6px;
-            background-size: 20px 20px;
-            background-position: 16px 14px;
-          }
-
-          .password {
-            background: url(/lock.svg) no-repeat scroll 7px 6px;
-            background-size: 20px 20px;
-            background-position: 16px 14px;
-          }
-
-          .error {
-            margin: 0.5rem 0 0;
-            display: none;
-            color: brown;
-          }
-
-          .error.show {
-            display: block;
-          }
-        `}</style>
+  <Form.Group controlId="formBasicPassword">
+    <Form.Label>Password</Form.Label>
+    <Form.Control type="password" size="sm" placeholder="Password" />
+  </Form.Group>
+ 
+  <Button variant="primary" size="sm" type="submit">
+    Submit
+  </Button>
+</Form>
+</div>
       </>
     );
   }
