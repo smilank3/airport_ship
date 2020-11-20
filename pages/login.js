@@ -10,9 +10,8 @@ import LoginComp from '../components/Login/Login'
 
 
 
-const Login = () => {
+const Login = (props) => {
   const router = useRouter();
-
 
 
 
@@ -26,7 +25,7 @@ const Login = () => {
     
 
              
-              <LoginComp />
+              <LoginComp isAdmin={false}/>
      
 
    

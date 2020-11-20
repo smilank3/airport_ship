@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import Navigation from '../components/navigation';
 //import Container from '../components/Container/Container'
 import {Container,Row,Col} from 'react-bootstrap'
@@ -10,14 +10,23 @@ import Track from '../components/Track/Track'
 import {TiLocation} from 'react-icons/ti'
 import {FaShippingFast} from 'react-icons/fa'
 import {AiFillDollarCircle} from 'react-icons/ai'
+import Router from 'next/router'
 
 import Layout from '../components/Layout/Layout'
+import sendRequest from '../lib/sendRequest'
 
 
-const Test=()=>{
+const Test=(props)=>{
 
-const [button,setButton]=useState("track")
+const [button,setButton]=useState("track");
+
+
 	return (<div>
+
+
+
+ <div>
+ 
 		
 
 
@@ -25,7 +34,7 @@ const [button,setButton]=useState("track")
 
 <Row style={{justifyContent:'center'}}>
       <Col  xs={12} sm={12} md={6} lg={6} xlg={6}> <div style={{marginBottom:'40px'}}>
-                     <h2 style={{marginBottom:'8px', fontSize:'24px', fontWeight:700, lineHeight:1.2,textAlign:'center',fontFamily:'Georgia'}}>
+                     <h2 style={{marginBottom:'8px', fontSize:'24px', fontWeight:700, lineHeight:1.2,textAlign:'center',fontFamily:'Georgia',color:'purple'}}>
                      Ship what you can't Ship.
                       </h2>
 
@@ -50,7 +59,7 @@ const [button,setButton]=useState("track")
                <div style={{border:'3px solid #412be012',height:'',width:'',borderRadius:'',padding:'10px',
 		display:'flex',justifyContent:'center',alignItems:'center',fontWeight:500,
 
-         backgroundColor:button==="rate"?"lightblue":''
+         backgroundColor:button==="rate"?"purple":'',color:button==="rate"?'#efefef':''
 	}}
 
 		onClick={()=>setButton('rate')}>
@@ -66,7 +75,7 @@ const [button,setButton]=useState("track")
                <div style={{border:'3px solid #412be012',height:'',width:'',borderRadius:'',padding:'10px',
 		display:'flex',justifyContent:'center',alignItems:'center',fontWeight:500,
 
-	 backgroundColor:button==="track"?"lightblue":''}}
+	 backgroundColor:button==="track"?"purple":'',color:button=="track"?'#efefef':''}}
 
 		onClick={()=>setButton('track')}>
                <FaShippingFast size="24px" style={{marginRight:'6px'}}/>
@@ -82,7 +91,7 @@ const [button,setButton]=useState("track")
                <div style={{border:'3px solid #412be012',height:'',width:'',borderRadius:'',padding:'10px',
 		display:'flex',justifyContent:'center',alignItems:'center',fontWeight:500,
 
-	 backgroundColor:button==="locations"?"lightblue":''}}
+	 backgroundColor:button==="locations"?"purple":'',color:button==="locations"?'#efefef':''}}
 
 		onClick={()=>setButton('locations')}>
 
@@ -101,10 +110,9 @@ const [button,setButton]=useState("track")
 
 
 	{
-	button==="track"?(<Track/>): button==="rate"?(<Rate/>):<Table/>}
+	button==="track"?(<Track/>): button==="rate"?(<Rate/>):<Table />}
 
-  
-
+</div>
 
 	</div>)
 }

@@ -10,21 +10,41 @@ import {Container} from 'react-bootstrap'
 
 
 import {CgMenuRound,CgMenuGridR} from 'react-icons/cg'
+import {FaUserAlt,FaPaperPlane} from 'react-icons/fa'
+import NavProfile from './navprofile'
 
 
-
-const Navigation =()=>{
+const Navigation =(props)=>{
+console.log('Navigation')
 
 	return (
 		<>
 
-<Navbar bg="light" expand="lg"    fixed="top" sticky="" style={{fontFamily:'Georgia',letterSpacing:'0.02em',border:'',padding:'3px 3px',borderBottom:"1px solid #e9e9e9f2",backgroundColor:'#f8f8f8f2'}}>
+<Navbar bg="light" expand="lg"    fixed="top" sticky="" style={{fontFamily:'georgia',letterSpacing:'0.02em',border:'',padding:'3px 3px',borderBottom:"1px solid #e9e9e9f2",backgroundColor:'#f8f8f8f2',minHeight:'54px'}}>
 <Container style={{widht:'100%',maxWidth:'1070px'}}>
-  <Navbar.Brand href="/" style={{paddingLeft:'4px'}}>AirExp</Navbar.Brand>
-  <Navbar.Toggle aria-controls="basic-navbar-nav" style={{border:'none',outline:'none'}}>  <CgMenuRound size="32px" fill="red"/></Navbar.Toggle>
+
+
+
+  <Navbar.Brand href="/" style={{paddingLeft:'',display:''}}><FaPaperPlane size="24px" fill="purple" style={{padding:'',display:'',marginLeft:'3px',marginRight:'4px'}} /> <span style={{fontWeight:700}}>AirEx</span></Navbar.Brand>
+  {/* if user show user log else tobble*/}
+
+{props.isAuthenticated?(<Navbar.Toggle aria-controls="basic-navbar-nav" style={{border:'none',outline:'none'}}> 
+   <FaUserAlt size="28px" fill="black"/></Navbar.Toggle>)
+:(
+  <Navbar.Toggle aria-controls="basic-navbar-nav" style={{border:'none',outline:'none'}}> 
+   <CgMenuRound size="32px" fill="red"/></Navbar.Toggle>
+  )
+    }
+
+
+
+
+
+
+
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link href="/">Home</Nav.Link>
+      <Nav.Link style={{marginLeft:'20px'}} href="/aboutus">About us</Nav.Link>
    
   
     </Nav>
@@ -38,12 +58,11 @@ const Navigation =()=>{
         <span style={{border:'1px solid black',padding:'4px 8px'}}>login or sign up</span>
       </Nav.Link>
 */}
-<Nav>
-      <Nav.Link href="/signup" style={{fontWeight:600,color:''}}>Create account</Nav.Link>
-      <Nav.Link eventKey={2} href="/login" style={{fontWeight:600,color:''}}>
-        Login
-      </Nav.Link>
-    </Nav>
+
+
+{/* this nav would chang if use is authenticated.*/}
+
+  <NavProfile isAuthenticated={props.isAuthenticated} userProfile={props.userProfile} />
   </Navbar.Collapse>
   </Container>
 </Navbar>
