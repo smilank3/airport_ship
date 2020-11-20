@@ -24,7 +24,7 @@ const signUp = () => {
       </Head>
 
   
-              <SignUpComp />
+              <SignUpComp isAdmin={false}/>
      
 
    
