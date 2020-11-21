@@ -52,7 +52,7 @@ const [button,setButton]=useState("track");
       </Row>
 
 	<Row style={{justifyContent:'center'}}>
-		<Col lg={2} md={2} sm={4} xs={4}  style={{border:'',cursor:'pointer',}}>
+		<Col lg={2} md={2} sm={4} xs={4}  style={{border:'',cursor:'pointer', }}>
 
 
 
@@ -63,7 +63,7 @@ const [button,setButton]=useState("track");
 	}}
 
 		onClick={()=>setButton('rate')}>
-		<AiFillDollarCircle size="24px" style={{marginRight:'6px'}}/>
+						<AiFillDollarCircle size="24px" style={{ marginRight: '6px'}}/>
                	Rate
                </div>
 		</Col>
