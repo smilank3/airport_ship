@@ -20,7 +20,8 @@ console.log('Navigation')
 	return (
 		<>
 
-<Navbar bg="light" expand="lg"    fixed="top" sticky="" style={{fontFamily:'georgia',letterSpacing:'0.02em',border:'',padding:'3px 3px',borderBottom:"1px solid #e9e9e9f2",backgroundColor:'#f8f8f8f2',minHeight:'54px'}}>
+      <Navbar expand="lg" fixed="top" sticky="" style={{ fontFamily: 'Georgia', letterSpacing: '0.02em', border: '', padding: '3px 3px', borderBottom: "1px solid #E463B6", backgroundColor: '#363673' }}>
+
 <Container style={{widht:'100%',maxWidth:'1070px'}}>
 
 
