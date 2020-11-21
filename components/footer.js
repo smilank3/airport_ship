@@ -5,7 +5,7 @@ const Footer=()=>{
 
 	return (
 
-	<div style={{display:'flex',justifyContent:'center',padding:'20px',height:'60px',marginBottom:'10px',borderTop:'1px solid #8080803d',}}>
+		<div style={{ display: 'flex', justifyContent: 'center', padding: '20px', height: '60px', marginBottom: '10px', borderTop: '1px solid #8080803d', color: ' rgb(253, 253, 253)'}}>
 		
          <p> ©{new Date().getFullYear()} AirExp</p>
 

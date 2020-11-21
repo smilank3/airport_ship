@@ -26,7 +26,7 @@ console.log('Navigation')
 
 
 
-  <Navbar.Brand href="/" style={{paddingLeft:'',display:''}}><FaPaperPlane size="24px" fill="purple" style={{padding:'',display:'',marginLeft:'3px',marginRight:'4px'}} /> <span style={{fontWeight:700}}>AirEx</span></Navbar.Brand>
+          <Navbar.Brand href="/" style={{ paddingLeft: '', display: '' }}><FaPaperPlane size="24px" fill="purple" style={{ padding: '', display: '', marginLeft: '3px', marginRight: '4px' }} /> <span style={{ fontWeight: 700, color: " rgb(253, 253, 253)"}}>AirEx</span></Navbar.Brand>
   {/* if user show user log else tobble*/}
 
 {props.isAuthenticated?(<Navbar.Toggle aria-controls="basic-navbar-nav" style={{border:'none',outline:'none'}}> 
@@ -45,7 +45,7 @@ console.log('Navigation')
 
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link style={{marginLeft:'20px'}} href="/aboutus">About us</Nav.Link>
+              <Nav.Link style={{ marginLeft: '20px', color: " rgb(253, 253, 253)"}} href="/aboutus">About us</Nav.Link>
    
   
     </Nav>

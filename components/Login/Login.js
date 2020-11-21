@@ -65,7 +65,8 @@ console.log(this.state)
         
          
           <div style={{ border: '', maxWidth: '', padding: '10px', display: 'flex', justifyContent: 'center', width: '100%'}}>
-        <Form onSubmit={this.handleSubmit.bind(this)} style={{padding:'10px',border:'1px solid #e1dcdc',minWidth:'300px',borderRadius:'12px',background:'',color:''}}>
+          <Form onSubmit={this.handleSubmit.bind(this)} style={{
+            padding: '10px', border: '1px solid #e1dcdc', minWidth: '300px', borderRadius: '12px', background: '', color: ' rgb(253, 253, 253)', backgroundColor: 'rgb(54, 54, 115)'}}>
 
         <h4 style={{textAlign:'center',marginBottom:'20px'}}>Sign In</h4>
 
