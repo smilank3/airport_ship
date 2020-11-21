@@ -40,7 +40,8 @@ const [button,setButton]=useState("track");
                       <div style={{marginBottom:'20px'}}>
                     </div>
                      <p style={{lineHeight:1.75, fontSize:'15px',fontFamily:'Georgia', marginBottom:0,marginTop:0,textAlign:'center'}}>
-                         Ship your favourite samurai sword, christmas cracker, vintage whiskey you just bought.
+						Ship your favourite samurai sword, christmas cracker, vintage whiskey you just bought.
+						
                      </p>
 
           

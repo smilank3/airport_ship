@@ -2,8 +2,7 @@
 
 import {Component} from 'react';
 import sendRequest from '../../lib/sendRequest'
-import {handleLogin} from '../../lib/auth'
-
+import frontpageBG from '../../assests/image/262899.jpg'
 
 import {Form,Button,Alert} from 'react-bootstrap'
 export default class LoginForm extends Component {
@@ -62,7 +61,10 @@ console.log(this.state)
   render() {
     return (
       <>
-      <div style={{border:'',maxWidth:'',padding:'10px',display:'flex',justifyContent:'center',width:'100%'}}>
+       
+        
+         
+          <div style={{ border: '', maxWidth: '', padding: '10px', display: 'flex', justifyContent: 'center', width: '100%'}}>
         <Form onSubmit={this.handleSubmit.bind(this)} style={{padding:'10px',border:'1px solid #e1dcdc',minWidth:'300px',borderRadius:'12px',background:'',color:''}}>
 
         <h4 style={{textAlign:'center',marginBottom:'20px'}}>Sign In</h4>
@@ -93,7 +95,8 @@ console.log(this.state)
     sign In
   </Button>
 </Form>
-</div>
+          </div>
+        
       </>
     );
   }
