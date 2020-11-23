@@ -3,7 +3,7 @@
 
 module.exports={
 	mongodb:{
-		dbURI:"mongodb+srv://smoethingyours@cluster0.omm64.gcp.mongodb.net/airportSec?retryWrites=true&w=majority"
+		dbURI:"mongodb+srv://mllog:mllog123@cluster0.omm64.gcp.mongodb.net/airportSec?retryWrites=true&w=majority"
 	},
 	
 	stripe:{
