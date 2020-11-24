@@ -3,7 +3,8 @@
 
 module.exports={
 	mongodb:{
-		dbURI:"mongodb+srv://Brandon_S:Notworking3!@cluster0.6nvng.mongodb.net/<dbname>?retryWrites=true&w=majority"
+		dbURI:"mongodb+srv://mllog:mllog123@cluster0.omm64.gcp.mongodb.net/airportSec?retryWrites=true&w=majority"
+
 	},
 	
 	stripe:{
