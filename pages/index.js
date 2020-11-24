@@ -33,7 +33,7 @@ const [button,setButton]=useState("track");
 
 <Row style={{justifyContent:'center'}}>
       <Col  xs={12} sm={12} md={6} lg={6} xlg={6}> <div style={{marginBottom:'40px'}}>
-                     <h2 style={{marginBottom:'8px', fontSize:'24px', fontWeight:700, lineHeight:1.2,textAlign:'center',fontFamily:'Georgia',color:'purple'}}>
+                     <h2 style={{marginBottom:'8px', fontSize:'24px', fontWeight:700, lineHeight:1.2,textAlign:'center',fontFamily:'Georgia',color:'white'}}>
                      Ship what you can't Ship.
                       </h2>
 
