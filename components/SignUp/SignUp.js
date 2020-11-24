@@ -77,7 +77,7 @@ export default class SignUp extends Component {
 
 const {token,userAccount}=res;
 if(!token){
-  alert(req.error);
+  alert(res.error);
   return;
 }
 

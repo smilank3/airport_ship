@@ -1,15 +1,15 @@
 
-
+//TODO  : #34
 import React, {useState,useEffect} from 'react';
 import {Table,Badge} from 'react-bootstrap'
 import sendRequest from '../../lib/sendRequest'
 import {formatDate} from '../../utils/formatDate'
 
-const History=({userProfile})=>{
+const History=({airportLocation})=>{
 
 const [history,setHistory]=useState(null);
 
-console.log(userProfile)
+
 
 	useEffect(()=>{
 
@@ -19,14 +19,14 @@ console.log(userProfile)
 
 
 
-    const res=await sendRequest('/api/admin/getPackagesByLocation',{body:JSON.stringify({location:userProfile.airportLocation.airportName})});
+    const res=await sendRequest('/api/admin/getPackagesByLocation',{body:JSON.stringify({location:airportLocation.airportName})});
 
-console.log(res)
+
 
     setTimeout(()=>{
 
   setHistory(res.packages)
-    },90)
+    },10)
  
    
   }
@@ -38,20 +38,16 @@ console.log(res)
 
 
 if(!history){  // if history is null  show loading...
-  return <div className="loading">
-    <div className="loader"></div>
-</div>
+  return null;
 }
 
 	return (
 <div style={{marginTop:'50px',display:'block'}}>
-
-  <h4 style={{marginBottom:'20px'}}>{userProfile.airportLocation.airportName},  {userProfile.airportLocation.airportCity},  {userProfile.airportLocation.airportCountry}</h4>
+  <h6 style={{marginBottom:'20px',fontWeight:700,color:'purple'}}>{airportLocation.airportName},  {airportLocation.airportCity},  {airportLocation.airportCountry}</h6>
 <Table responsive  hover size="sm">
-
   <thead>
     <tr>
-      <th>Tracking Id</th>
+      <th>Id</th>
       <th>Created At</th>
       <th>Shipped Date</th>
       <th>Delivered Date</th>
@@ -69,8 +65,8 @@ if(!history){  // if history is null  show loading...
 <tr key ={i}>
       <td>{h.packageId}</td>
       <td>{formatDate(h.createdAt)}</td>
-      <td>{h.packageShipped.isShipped?(formatDate(h.packageShipped.date)):(<Badge variant="info">not shipped</Badge>)}</td>
-      <td>{h.packageDelivered.isDelivered?(formatDate(h.packageDelivered.date)):(<Badge variant="success">not delivered</Badge>)}</td>
+      <td>{h.packageShipped.isShipped?(h.packageShipped.date):(<Badge variant="info">not shipped</Badge>)}</td>
+      <td>{h.packageDelivered.isDilevered?(h.packageDelivered.date):(<Badge variant="success">not delivered</Badge>)}</td>
       <td>{h.courierCompany}</td>
       <td>${h.totalCost}</td>
       <td>{h.payBy}</td>

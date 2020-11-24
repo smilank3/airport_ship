@@ -98,6 +98,28 @@ return packages;
    }
 
 
+   // get package by user Email '/user/dashboard';
+
+
+   static async getPackagesByEmail(email){
+
+    let packages=await  this.aggregate([
+    {$match:{email:`${email}`}},
+    {$project:{packageId:'$trackingId',createdAt:'$createdAt',payBy:'$payBy',courierCompany:'$courierCompany',packageShipped:"$packageShipped",packageProcessed:"$packageProcessed",packageDelivered:'$packageDelivered',totalCost:"$totalCost"}}
+
+
+      ])
+
+
+    
+if(!packages){
+  return [];
+}
+
+return packages;
+   }
+
+
 
    // update package when simulating order
 

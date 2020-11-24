@@ -61,6 +61,8 @@ let name=e.target.name;
 
 let ex=name==="packageShipped"?'isShipped':name==="packageProcessed"?"isProcessed":"isDelivered";
 
+console.log({trackingId:trackingid,data:{[`${name}`]:{date:new Date(),[`${ex}`]:true}}})
+
 
   let res=await sendRequest('/api/admin/updatePackage',{body:JSON.stringify({trackingId:trackingid,data:{[`${name}`]:{date:new Date(),[`${ex}`]:true}}})});
   if(res.error){
@@ -104,7 +106,7 @@ let ex=name==="packageShipped"?'isShipped':name==="packageProcessed"?"isProcesse
 
         	<Row style={{justifyContent:'center',marginTop:'50px',display:!order?'none':''}}>
         	<ListGroup>
-        	 <ListGroup.Item><Button name="packageProcessed" att="isProcessed" disabled={order && order.packageProcessed.isProcessed?true:false} >Order Delivered</Button>
+        	 <ListGroup.Item><Button name="packageProcessed" att="isProcessed" disabled={order && order.packageProcessed.isProcessed?true:false} >Order Processed</Button>
 
         	  {order && order.packageProcessed.isProcessed?(<Badge variant="success"  style={{marginLeft:'10px'}}>Done</Badge>):null}
 

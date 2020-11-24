@@ -5,7 +5,9 @@ import {Table,Badge} from 'react-bootstrap'
 import sendRequest from '../../lib/sendRequest'
 import {formatDate} from '../../utils/formatDate'
 
-const History=({userProfile})=>{
+
+// get order history  by email address.
+const OrderHistory=({userProfile})=>{
 
 const [history,setHistory]=useState(null);
 
@@ -19,7 +21,7 @@ console.log(userProfile)
 
 
 
-    const res=await sendRequest('/api/admin/getPackagesByLocation',{body:JSON.stringify({location:userProfile.airportLocation.airportName})});
+    const res=await sendRequest('/api/admin/getPackagesByEmail',{email:JSON.stringify({location:userProfile.email})});
 
 console.log(res)
 
@@ -46,7 +48,7 @@ if(!history){  // if history is null  show loading...
 	return (
 <div style={{marginTop:'50px',display:'block'}}>
 
-  <h4 style={{marginBottom:'20px'}}>{userProfile.airportLocation.airportName},  {userProfile.airportLocation.airportCity},  {userProfile.airportLocation.airportCountry}</h4>
+  
 <Table responsive  hover size="sm">
 
   <thead>
@@ -82,6 +84,8 @@ if(!history){  // if history is null  show loading...
    
   </tbody>
 </Table>
+
+{history && !history.length?<div><Badge variant="info" >No history</Badge></div>:null}
 </div>
 
 		)
@@ -89,4 +93,4 @@ if(!history){  // if history is null  show loading...
 
 
 
-export default History;
+export default OrderHistory;

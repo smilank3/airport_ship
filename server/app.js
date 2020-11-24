@@ -320,6 +320,22 @@ server.post('/api/admin/getPackagesByLocation',async(req,res)=>{
   }
 })
 
+// get all package history by email 'user dashoard';
+
+server.post('/api/admin/getPackagesByEmail',async(req,res)=>{
+
+  const {email}=req.body;
+
+  try{
+
+    let packages=await Package.getPackagesByLocation(email);
+
+    res.json({status:'ok',packages:packages})
+  }catch(err){
+    res.json({error:err.message})
+  }
+})
+
 
 // get shipping status based on tracking id
 

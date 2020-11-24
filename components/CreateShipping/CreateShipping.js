@@ -341,7 +341,7 @@ _filter=(r,lists)=>{
 
 
     render() {
-
+console.log(this.props.userProfile)
         return (
             <div>
 
