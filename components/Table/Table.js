@@ -41,7 +41,7 @@ setTimeout(()=>{
 <h3 >Our locations :</h3>
 
 
-<Table striped bordered hover variant="dark" size="">
+      <Table striped bordered hover variant="dark" size="" style={{ marginTop: '40px', backgroundColor: 'rgb(54, 54, 115)' }}>
   <thead>
     <tr>
      

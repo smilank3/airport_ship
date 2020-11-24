@@ -26,22 +26,22 @@ const [button,setButton]=useState("track");
 
 
  <div>
- 
-		
+
 
 
 
 
 <Row style={{justifyContent:'center'}}>
       <Col  xs={12} sm={12} md={6} lg={6} xlg={6}> <div style={{marginBottom:'40px'}}>
-                     <h2 style={{marginBottom:'8px', fontSize:'24px', fontWeight:700, lineHeight:1.2,textAlign:'center',fontFamily:'Georgia',color:'purple'}}>
+                     <h2 style={{marginBottom:'8px', fontSize:'24px', fontWeight:700, lineHeight:1.2,textAlign:'center',fontFamily:'Georgia',color:'white'}}>
                      Ship what you can't Ship.
                       </h2>
 
                       <div style={{marginBottom:'20px'}}>
                     </div>
-                     <p style={{lineHeight:1.75, fontSize:'15px',fontFamily:'Georgia', marginBottom:0,marginTop:0,textAlign:'center'}}>
-                         Ship your favourite samurai sword, christmas cracker, vintage whiskey you just bought.
+                     <p style={{lineHeight:1.75, fontSize:'20px',fontFamily:'Georgia', marginBottom:0,marginTop:0,textAlign:'center'}}>
+						Ship your favourite samurai sword, christmas cracker, vintage whiskey you just bought.
+						
                      </p>
 
           
@@ -52,7 +52,7 @@ const [button,setButton]=useState("track");
       </Row>
 
 	<Row style={{justifyContent:'center'}}>
-		<Col lg={2} md={2} sm={4} xs={4}  style={{border:'',cursor:'pointer',}}>
+		<Col lg={2} md={2} sm={4} xs={4}  style={{border:'',cursor:'pointer', }}>
 
 
 
@@ -63,7 +63,7 @@ const [button,setButton]=useState("track");
 	}}
 
 		onClick={()=>setButton('rate')}>
-		<AiFillDollarCircle size="24px" style={{marginRight:'6px'}}/>
+						<AiFillDollarCircle size="24px" style={{ marginRight: '6px'}}/>
                	Rate
                </div>
 		</Col>
