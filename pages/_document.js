@@ -14,7 +14,7 @@ class MyDocument extends Document {
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta name="google" content="notranslate" />
           <meta name="theme-color" content="#1976D2" />
-          
+           <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrWilSILk5NGFN23nEFhXqh-fzZOLKFNI&libraries=places"></script>
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400:latin"
