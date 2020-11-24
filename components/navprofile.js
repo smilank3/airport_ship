@@ -40,8 +40,8 @@ if(props.isAuthenticated){
  return(
 				<Nav>
 				    		
-				      <Nav.Link href="/signup" style={{fontWeight:600,color:'',marginLeft:'20px'}}>Create account</Nav.Link>
-				      <Nav.Link eventKey={2} href="/login" style={{fontWeight:600,color:'',marginLeft:'20px'}}>
+     <Nav.Link href="/signup" style={{ fontWeight: 600, color: '', marginLeft: '20px', color: ' rgb(253, 253, 253)'}}>Create account</Nav.Link>
+     <Nav.Link eventKey={2} href="/login" style={{ fontWeight: 600, color: '', marginLeft: '20px', color: ' rgb(253, 253, 253)'}}>
 				        Login
 				      </Nav.Link>
 				    </Nav>
