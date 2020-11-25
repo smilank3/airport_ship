@@ -19,13 +19,13 @@ if(props.isAuthenticated){
 
 
 
-       style={{fontWeight:500,color:'purple',marginLeft:'20px'}}>Dashboard</Nav.Link>
+       style={{fontWeight:500,color:'white',marginLeft:'20px'}}>Dashboard</Nav.Link>
       <Nav.Link href={(props.userProfile.role==="manager") || (props.userProfile.role==='admin')?"/admin/profile":
       props.userProfile.role==="kiosk clerk"?"/kiosk/personnel":(props.userProfile.role==='staff')?"/staff/profile":'/profile'}
       
 
-       style={{fontWeight:500,color:'purple',marginLeft:'20px'}}>Profile</Nav.Link>
-      <Nav.Link eventKey={2} href="/login" style={{fontWeight:500,color:'purple',marginLeft:'20px'}}
+       style={{fontWeight:500,color:'white',marginLeft:'20px'}}>Profile</Nav.Link>
+      <Nav.Link eventKey={2} href="/login" style={{fontWeight:500,color:'white',marginLeft:'20px'}}
 
       onClick={()=>logout()}>
         Log out
