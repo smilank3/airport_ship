@@ -33,6 +33,7 @@
     "react-dom": "^16.13.1",
     "react-flexbox-grid": "^2.1.2",
     "react-icons": "^3.11.0",
+    "react-places-autocomplete": "^7.3.0",
     "react-stripe-checkout": "^2.6.3",
     "shortid": "^2.2.16",
     "stripe": "^8.115.0"
