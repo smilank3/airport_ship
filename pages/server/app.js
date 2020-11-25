@@ -9,7 +9,7 @@ const app=next({dev});
 const port= process.env.PORT||8001;
 
 const bcrypt =require('bcrypt')
-
+const cookie=require('js-cookie');
 
 const {generateToken,validateToken}=require('./authToken')
 

@@ -101,9 +101,9 @@ handleLogin(token,userAccount.role);
     return (
       <>
       <div style={{border:'',maxWidth:'',padding:'10px',display:'flex',justifyContent:'center',minWidth:''}}>
-       <Form   noValidate validated={this.state.validate} onSubmit={this.handleSubmit.bind(this)} style={{border:'1px solid #e1dcdc',padding:'20px',borderRadius:'9px'}}>
+          <Form noValidate validated={this.state.validate} onSubmit={this.handleSubmit.bind(this)} style={{ border: '1px solid #e1dcdc', padding: '20px', borderRadius: '9px', backgroundColor: 'rgb(54, 54, 115)', color: ' rgb(253, 253, 253)'}}>
       
- <h4 style={{textAlign:'center',marginBottom:'30px'}}>Create Account</h4>
+ <h4 style={{textAlign:'center',marginBottom:'30px' }}>Create Account</h4>
       <Form.Row>
         <Form.Group as={Col} md="4" controlId="validationCustom01">
           <Form.Label>First name</Form.Label>

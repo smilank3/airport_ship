@@ -4,6 +4,7 @@
 module.exports={
 	mongodb:{
 		dbURI:"mongodb+srv://mllog:mllog123@cluster0.omm64.gcp.mongodb.net/airportSec?retryWrites=true&w=majority"
+
 	},
 	
 	stripe:{
