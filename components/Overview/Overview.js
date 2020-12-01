@@ -13,6 +13,7 @@ import CustomeToggle from './CustomeToggle'
 import {FaHistory,FaShippingFast} from 'react-icons/fa'
 import Chart from './Chart'
 import History from './History'
+import DropOffHistory from './DropOffHistory'
 
 const Overview=()=>{
 
@@ -24,7 +25,7 @@ const Overview=()=>{
 
   // to fetch data on button value change
 
-  const [state,setState]=useState('history')
+  const [state,setState]=useState('shippingHistory')
 
 const [data,setData]=useState([]);
 
@@ -98,13 +99,23 @@ setData(res.data);
       >
         <Modal.Header closeButton>
             <div style={{display:'flex',justifyContent:'space-between'}} >
-        <div style={{border:'2px solid purple',padding:'2px 10px',background:state==="history"?'purple':'',color:state==="history"?'white':'purple',fontWeight:600,marginBottom:'',float:'left',cursor:'pointer',borderRadius:'4px'}}
-onClick={()=>{return setState('history');}}
+        <div style={{border:'2px solid purple',padding:'2px 10px',background:state==="shippingHistory"?'purple':'',color:state==="shippingHistory"?'white':'purple',fontWeight:600,marginBottom:'',float:'left',cursor:'pointer',borderRadius:'4px'}}
+onClick={()=>{return setState('shippingHistory');}}
         >
         
            <FaHistory size="20px" style={{padding:'2px',marginRight:'4px'}}/>
-      <span>History</span>
+      <span>Shipping History</span>
         </div>
+
+
+            <div style={{border:'2px solid purple',marginLeft:'30px',padding:'2px 10px',background:state==="dropOffHistory"?'purple':'',color:state==="dropOffHistory"?'white':'purple',fontWeight:600,marginBottom:'',float:'left',cursor:'pointer',borderRadius:'4px'}}
+onClick={()=>{return setState('dropOffHistory');}}
+        >
+        
+           <FaHistory size="20px" style={{padding:'2px',marginRight:'4px'}}/>
+      <span>Drop Off History</span>
+        </div>
+
 
     <div style={{marginLeft:'30px',border:'2px solid purple',padding:'2px 10px',background:state==="flowCharts"?'purple':'',color:state==="flowCharts"?'white':'purple',fontWeight:600,marginBottom:'',float:'right',cursor:'pointer',borderRadius:'4px'}}
 onClick={()=>setState('flowCharts')}
@@ -118,9 +129,9 @@ onClick={()=>setState('flowCharts')}
         </Modal.Header>
         <Modal.Body   style={{minHeight:'70vh'}}>
        
- {state==='history'?(
+ {state==='shippingHistory'?(
    <History airportLocation={airportLocation}/>
-    ):(
+    ): (state==='dropOffHistory')?(<DropOffHistory airportLocation={airportLocation}/>):(
 <div style={{marginTop:'70px'}}>
   <Chart />
 

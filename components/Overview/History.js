@@ -44,7 +44,9 @@ if(!history){  // if history is null  show loading...
 	return (
 <div style={{marginTop:'50px',display:'block'}}>
   <h6 style={{marginBottom:'20px',fontWeight:700,color:'purple'}}>{airportLocation.airportName},  {airportLocation.airportCity},  {airportLocation.airportCountry}</h6>
-<Table responsive  hover size="sm">
+<div style={{background:'#f0dfdf',padding:'10px',minHeight:'50vh'}} >
+
+<Table responsive bordered hover size="sm">
   <thead>
     <tr>
       <th>Id</th>
@@ -54,6 +56,7 @@ if(!history){  // if history is null  show loading...
       <th>Courier</th>
       <th>Cost</th>
       <th>Payment</th>
+      <th>Processed By </th>
     </tr>
   </thead>
   <tbody>
@@ -70,6 +73,7 @@ if(!history){  // if history is null  show loading...
       <td>{h.courierCompany}</td>
       <td>${h.totalCost}</td>
       <td>{h.payBy}</td>
+      <td> {h.processedBy}</td>
     </tr>
 
   		)
@@ -78,6 +82,7 @@ if(!history){  // if history is null  show loading...
    
   </tbody>
 </Table>
+</div>
 </div>
 
 		)

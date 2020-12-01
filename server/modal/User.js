@@ -353,7 +353,7 @@ static async createShipping(_package){
 const {packages,senderFirstName,senderLastName,senderPhone,senderEmail,airportLocation,processedBy,
 
 	receiverFirstName, receiverLastName,receiverEmail,receiverPhone,receiverAddress,receiverCity,receiverApt,receiverCountry,
-courierCompany,orderId,stripeToken,totalCost,payBy}=_package;
+courierCompany,orderId,stripeToken,totalCost,payBy,dispatchType}=_package;
 
 
 
@@ -384,7 +384,8 @@ if(payBy==='cash'){
 	 	createdAt:new Date(),
 	 	packageProcessed:{date:new Date(),isProcessed:true},
 	 	packageShipped:{date:null,isShipped:false},
-	 	packageDelivered:{date:null,isDelivered:false}
+	 	packageDelivered:{date:null,isDelivered:false},
+	 	dispatchType
 
 	 })
 }
@@ -420,6 +421,7 @@ if(payBy==='card'){
 	 	orderId,
 	 	totalCost,
 	 	payBy,
+	 	dispatchType,
 	 	createdAt:new Date(),
 	 	stripeCharge:chargeObj,
 	 packageProcessed:{date:new Date(),isProcessed:true},
@@ -452,6 +454,90 @@ if(payBy==='card'){
 
 
 
+// create Drop off order
+
+
+static async createDropOff(_package){
+
+     console.log(_package);
+const {packages,senderFirstName,senderLastName,senderPhone,senderEmail,airportLocation,processedBy,senderAddress,senderApt,senderCity,senderCountry,senderZip,
+
+	receiverFirstName, receiverLastName,receiverEmail,receiverPhone,receiverAddress,receiverCity,receiverApt,receiverCountry,receiverZip,
+courierCompany,orderId,stripeToken,initialCost,payBy,dispatchType}=_package;
+
+
+if(payBy==='card'){
+
+
+	const charge=await stripeCharge({
+	amount:initialCost*100,
+	token:stripeToken.id,
+	buyerEmail:senderEmail
+});
+
+
+
+	
+
+
+	 return Package.create({
+	 	trackingId:shortid.generate(),
+	 	packages,
+	 	senderFirstName,
+	 	senderLastName,
+	 	senderPhone,
+	 	senderEmail,
+	 	senderAddress,
+	 	senderCity,
+	 	senderApt,
+	 	senderCountry,
+	 	senderZip,
+	 	airportLocation,
+	 	processedBy,
+	 	receiverFirstName,
+	 	receiverLastName,
+	 	receiverEmail,
+	 	receiverPhone,
+
+	 	receiverAddress,
+	 	receiverCity,
+	 	receiverCountry,
+	 	courierCompany,
+	 	receiverZip,
+	 	orderId,
+	 	
+	 	payBy,
+	 	dispatchType,
+	 	createdAt:new Date(),
+	 	stripeCharge:charge,
+	 	
+      pickUp:{date:null,isPickedUp:false,pickUpBy:null,usageTime:null,finalPayment:null},
+      stored:{date:new Date(),dropOffBy:senderFirstName,initialPayment:initialCost},
+
+    totalCost:null, // calculated later after pickup.
+	 	
+
+	 })
+
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+            
+
+
+
+	  return 1;
+}
 
 
 

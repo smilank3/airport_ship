@@ -21,7 +21,7 @@ console.log(userProfile)
 
 
 
-    const res=await sendRequest('/api/admin/getPackagesByEmail',{email:JSON.stringify({location:userProfile.email})});
+    const res=await sendRequest('/api/admin/getPackagesByEmail',{body:JSON.stringify({email:userProfile.email})});
 
 console.log(res)
 
@@ -47,7 +47,7 @@ if(!history){  // if history is null  show loading...
 
 	return (
 <div style={{marginTop:'50px',display:'block'}}>
-
+<div style={{background:'#f0dfdf',padding:'10px',minHeight:'50vh'}} >
   
 <Table responsive  hover size="sm">
 
@@ -84,8 +84,9 @@ if(!history){  // if history is null  show loading...
    
   </tbody>
 </Table>
+{history && !history.length?<div><Badge variant="info" style={{fontSize:'20px',texAlign:'center'}}>No history</Badge></div>:null}
+</div>
 
-{history && !history.length?<div><Badge variant="info" >No history</Badge></div>:null}
 </div>
 
 		)
