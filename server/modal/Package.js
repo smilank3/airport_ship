@@ -2,9 +2,11 @@
 const mongoose=require('mongoose');
 
 const {Schema}=mongoose;
+
+//To Do: make schema better.
        
 const mongoSchema = new Schema({
-    createdAt: { type: Date },
+    createdAt: { type: Date }, // in case of droOff it is used as stored date
     orderId: { type: String },
     trackingId: { type: String },
     packages: [{
@@ -19,6 +21,11 @@ const mongoSchema = new Schema({
     senderLastName: { type: String },
     senderPhone: { type: String },
     senderEmail: { type: String },
+    senderAddress:String,
+    senderApt:String,
+    senderZip:String,
+    senderCity:String,
+    senderCountry:String,
     airportLocation: {
 
         airportName: String,
@@ -57,6 +64,10 @@ const mongoSchema = new Schema({
     packageShipped: { date: Date, isShipped: Boolean },
     packageDelivered: { date: Date, isDelivered: Boolean },
 
+    dispatchType:{ type: String, enum: ["shipping", "dropOff"], default: 'shipping' }, // this way we can seperate history
+    pickUp:{date:Date,pickUpBy:String,usageTime:String,isPickedUp:Boolean,finalPayment:Number},
+    stored:{date:Date,dropOffBy:String,initialPayment:Number},
+
 
 })
 
@@ -75,11 +86,13 @@ class PackageClass{
     return packages;
   }
    
+   // regular  get shipped packages
    static async getPackagesByLocation(location){
 
     let packages=await this.aggregate([
-    {$match:{'airportLocation.airportName':{$eq:`${location}`}}},
-    {$project:{packageId:'$trackingId',createdAt:'$createdAt',payBy:'$payBy',courierCompany:'$courierCompany',packageShipped:"$packageShipped",packageProcessed:"$packageProcessed",packageDelivered:'$packageDelivered',totalCost:"$totalCost"}}
+    {$match:{'airportLocation.airportName':{$eq:`${location}`},dispatchType:'shipping'}},
+    {$project:{packageId:'$trackingId',createdAt:'$createdAt',payBy:'$payBy',courierCompany:'$courierCompany',
+    packageShipped:"$packageShipped",packageProcessed:"$packageProcessed",packageDelivered:'$packageDelivered',totalCost:"$totalCost",dispatchType:'$dispatchType',processedBy:'$processedBy'}}
 
 
       ])
@@ -97,6 +110,85 @@ return packages;
    
    }
 
+      // regular  get DropOff packages
+   static async getDropOffPackagesByLocation(location){
+
+    let packages=await this.aggregate([
+    {$match:{'airportLocation.airportName':{$eq:`${location}`},dispatchType:'dropOff'}},
+    {$project:{packageId:'$trackingId',stored:'$stored',payBy:'$payBy',courierCompany:'$courierCompany',packageShipped:"$packageShipped",packageProcessed:"$packageProcessed",
+    packageDelivered:'$packageDelivered',totalCost:"$totalCost",dispatchType:'$dispatchType',pickUp:'$pickUp',processedBy:'$processedBy',
+    senderFirstName:'$senderFirstName',
+    senderLastName:'$senderLastName',
+    senderEmail:'$senderEmail',
+    receiverFirstName:'$receiverFirstName',
+    receiverLastName:'$receiverLastName',
+    receiverEmail:'$receiverEmail',
+    senderPhone:'$senderPhone',
+    receiverPhone:'$receiverPhone',
+    orderId:'$orderId',
+    trackingId:'$trackingId'
+}}
+
+
+      ])
+  
+
+console.log(packages)
+
+if(!packages){
+  return [];
+}
+
+return packages;
+
+
+   
+   }
+
+
+   // get package by user Email '/user/dashboard'; (shipping history)
+
+
+   static async getPackagesByEmail(email){
+    console.log(' get pac by email')
+    console.log(email)
+
+    let packages=await  this.aggregate([
+    {$match:{senderEmail:`${email}`,dispatchType:'shipping'}},
+    {$project:{packageId:'$trackingId',createdAt:'$createdAt',payBy:'$payBy',courierCompany:'$courierCompany',packageShipped:"$packageShipped",packageProcessed:"$packageProcessed",packageDelivered:'$packageDelivered',totalCost:"$totalCost"}}
+
+
+      ])
+
+
+    
+if(!packages){
+  return [];
+}
+
+return packages;
+   }
+// get packages by email (dropOff history)
+   static async getDropOffPackagesByEmail(email){
+
+    let packages=await  this.aggregate([
+    {$match:{senderEmail:`${email}`,dispatchType:'dropOff'}},
+    {$project:{packageId:'$trackingId',createdAt:'$createdAt',payBy:'$payBy',
+    courierCompany:'$courierCompany',packageShipped:"$packageShipped",
+    packageProcessed:"$packageProcessed",packageDelivered:'$packageDelivered',totalCost:"$totalCost",
+
+    pickUp:'$pickUp',
+
+  }}
+
+
+      ])
+if(!packages){
+  return [];
+}
+
+return packages;
+   }
 
 
    // update package when simulating order
@@ -119,6 +211,30 @@ return packages;
     return 1;
 
    }
+   // update DropOffpackage by Kiosk clerk
+
+
+   static async updateDropOffPackage({query}){
+
+    console.log(query.orderId)
+    console.log(query.data)
+
+    let updatedPackage=await this.findOneAndUpdate({
+      orderId:query.orderId
+    },{$set:{pickUp:query.data}},{new:true});
+
+
+
+    console.log(updatedPackage);
+
+    if(!updatedPackage){
+        throw new Error('could not update order')
+    }
+
+    return updatedPackage;
+
+   }
+
 
 
 

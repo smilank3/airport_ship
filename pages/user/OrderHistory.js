@@ -5,7 +5,9 @@ import {Table,Badge} from 'react-bootstrap'
 import sendRequest from '../../lib/sendRequest'
 import {formatDate} from '../../utils/formatDate'
 
-const History=({userProfile})=>{
+
+// get order history  by email address.
+const OrderHistory=({userProfile})=>{
 
 const [history,setHistory]=useState(null);
 
@@ -19,7 +21,7 @@ console.log(userProfile)
 
 
 
-    const res=await sendRequest('/api/admin/getPackagesByLocation',{body:JSON.stringify({location:userProfile.airportLocation.airportName})});
+    const res=await sendRequest('/api/admin/getPackagesByEmail',{body:JSON.stringify({email:userProfile.email})});
 
 console.log(res)
 
@@ -45,9 +47,9 @@ if(!history){  // if history is null  show loading...
 
 	return (
 <div style={{marginTop:'50px',display:'block'}}>
-
-  <h6 style={{marginBottom:'20px',color:'purple',fontWeight:700}}>{userProfile.airportLocation.airportName},  {userProfile.airportLocation.airportCity},  {userProfile.airportLocation.airportCountry}</h6>
-<div style={{background:'#f0dfdf',padding:'10px',minHeight:'50vh'}} ><Table responsive  hover size="sm">
+<div style={{background:'#f0dfdf',padding:'10px',minHeight:'50vh'}} >
+  
+<Table responsive  hover size="sm">
 
   <thead>
     <tr>
@@ -58,7 +60,6 @@ if(!history){  // if history is null  show loading...
       <th>Courier</th>
       <th>Cost</th>
       <th>Payment</th>
-      <th>Processed By </th>
     </tr>
   </thead>
   <tbody>
@@ -75,7 +76,6 @@ if(!history){  // if history is null  show loading...
       <td>{h.courierCompany}</td>
       <td>${h.totalCost}</td>
       <td>{h.payBy}</td>
-      <td>{h.processedBy}</td>
     </tr>
 
   		)
@@ -84,7 +84,9 @@ if(!history){  // if history is null  show loading...
    
   </tbody>
 </Table>
+{history && !history.length?<div><Badge variant="info" style={{fontSize:'20px',texAlign:'center'}}>No history</Badge></div>:null}
 </div>
+
 </div>
 
 		)
@@ -92,4 +94,4 @@ if(!history){  // if history is null  show loading...
 
 
 
-export default History;
+export default OrderHistory;

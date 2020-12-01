@@ -8,7 +8,7 @@ module.exports={
 	},
 	
 	stripe:{
-		StripePublishableKey:"pk_test_DZwTE4Co1W29hYfsf8tH5v7oKQT009In6JaEI",  // change this
-		Stripe_Test_SecretKey:"sk_test_6GytXifKpkyLfsfvf16nNfZAwNl00P3mOMlmo" // change this
+			StripePublishableKey:"pk_test_DZwTE4Co1W29hY8tH5v7oKQT009In6JaEI",
+		Stripe_Test_SecretKey:"sk_test_6GytXifKpkyLvf16nNfZAwNl00P3mOMlmo"
 	}
 }

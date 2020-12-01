@@ -35,6 +35,11 @@ class App extends React.Component {
             senderLastName:'',
             senderPhone:'',
             senderEmail:'',
+            senderAddress:'',
+            senderZip:'',
+            senderApt:'',
+            senderCity:'',
+            senderCountry:'',
             // sincer creter is kiosk personnel we use his/her location as senderlocation
             airportLocation:this.props.userProfile.airportLocation,
             processedBy:this.props.userProfile.firstName,
@@ -48,13 +53,13 @@ class App extends React.Component {
             receiverZip:'',
             receiverCountry:'',
 
-            courierCompany:'FedEx Air',
-            totalCost:20,  // default is $20 and every new package will cost $3
+            courierCompany:'none',
+            initialCost:10,  // default is $20 and every new package will cost $3
 
             validate:false,
             finalValidate:false,
             showPaymentModal:null,
-            dispatchType:'shipping'
+            dispatchType:'dropOff'
 
         };
     }
@@ -90,7 +95,7 @@ class App extends React.Component {
           this.setState({
             ...this.state,
             packages:this.state.packages,
-            totalCost:this.state.totalCost-3,
+            initialCost:this.state.initialCost-3,
           })
 
 
@@ -105,7 +110,7 @@ class App extends React.Component {
         this.setState((prev,current)=>(
                {packages:prev.packages.concat(Package),
 
-                totalCost:prev.totalCost+3}
+                initialCost:prev.initialCost+3}
             ))
     }
 
@@ -204,13 +209,17 @@ onToken= async(token)=>{
       package_.payBy='card'
 
 
-  let res=await sendRequest('/api/admin/createShipping',{body:JSON.stringify(package_)});
+console.log(package_)
+
+  let res=await sendRequest('/api/admin/createDropOff',{body:JSON.stringify(package_)});
+  console.log(res)
   if(res.error){
     alert(res.error);
   }else{
     alert('succeed');
+    console.log(res)
 
-    alert(`Tracking Id : ${res.trackingId}. 
+    alert(`Tracking Id : ${res.trackingid}. 
        We will send this Id to customer cell phone.
        They can track their package using this id.
       `)
@@ -238,11 +247,12 @@ onToken= async(token)=>{
             receiverCountry:'',
 
             courierCompany:'FedEx Air',
-            totalCost:20,  // default is $20 and every new package will cost $3
+            initialCost:10,  // default is $20 and every new package will cost $3
 
             validate:false,
             finalValidate:false,
             showPaymentModal:null,
+            dispatchType:'dropOff'
 
         });
 
@@ -257,73 +267,6 @@ onToken= async(token)=>{
 
 }
 
-
-
-// pay cahs
-
-
-onPayCash=async(e)=>{
-  // cash payment.
-e.preventDefault();
-
-
- let orderId=new Date().getTime()+Math.random().toString(36).substr(2, 9);
-    var package_=this.state;
-      package_.orderId=orderId;
-      package_.payBy="cash";
-
-
-  let res=await sendRequest('/api/admin/createShipping',{body:JSON.stringify(package_)});
-  if(res.error){
-    alert(res.error)
-  }else{
-    alert('succeed');
-
-
-     alert(`Tracking Id : ${res.trackingId}. 
-       We will send this Id to customer cell phone.
-      `)
-
-    //reset
-
-    this.setState(
-      {
-   
-            packages:[],
-            senderFirstName:'',
-            senderLastName:'',
-            senderPhone:'',
-            senderEmail:'',
-            // sincer creter is kiosk personnel we use his/her location as senderlocation
-            airportLocation:this.props.userProfile.airportLocation,
-            processedBy:this.props.userProfile.email,
-            receiverFirstName:'',
-            receiverLastName:'',
-            receiverEmail:'',
-            receiverPhone:'',
-            receiverAddress:'',
-            receiverCity:'',
-            receiverApt:'',
-            receiverZip:'',
-            receiverCountry:'',
-
-            courierCompany:'FedEx Air',
-            totalCost:20,  // default is $20 and every new package will cost $3
-
-            validate:false,
-            finalValidate:false,
-            showPaymentModal:null,
-            dispatchType:'shipping'
-
-        });
-
-   
-
-
-  }
-
-  // 
-}
 
 
 
@@ -357,7 +300,7 @@ console.log(this.props.userProfile)
             <div className="step" data-target="#test-l-1">
               <button className="step-trigger" >
                 <span className="bs-stepper-circle" >1</span>
-                <span className="bs-stepper-label">Sender</span>
+                <span className="bs-stepper-label">Dropper</span>
               </button>
             </div>
             <div className="line"></div>
@@ -419,6 +362,37 @@ console.log(this.props.userProfile)
                               <input required type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" name="senderEmail" value={this.state.senderEmail} onChange={this.handleChange}/>
                             </div>
 
+                             <Form.Group controlId="">
+                          <Form.Label>Address</Form.Label>
+                          <Form.Control required type="text" size="sm" placeholder="street Address" style={{marginBottom:'10px'}}
+                            name="senderAddress" value={this.state.senderAddress} onChange={this.handleChange}
+                           />
+                          <Form.Control type="text" size="sm" placeholder="Apartment, suite, unit, building, floor, etc"  style={{marginBottom:'10px'}}
+                            name="senderApt" value={this.state.senderApt} onChange={this.handleChange}
+                           />
+                         
+                        </Form.Group>
+
+
+                        <Form.Row>
+                          <Form.Group as={Col} controlId="">
+                            <Form.Label>City</Form.Label>
+                            <Form.Control required size="sm"  name="senderCity" value={this.state.senderCity} onChange={this.handleChange}/>
+                          </Form.Group>
+
+                          <Form.Group as={Col} controlId="">
+                            <Form.Label>Country</Form.Label>
+                            <Form.Control required as="select" defaultValue="Choose..." size="sm" name="senderCountry" value={this.state.senderCountry} onChange={this.handleChange}>
+                              <option>Choose...</option>
+                              {['Canada','United States'].map((s,i)=>(
+                                <option value={`${s}`} key={i}>{s}</option>))}
+                          
+                            </Form.Control>
+                          </Form.Group>
+
+                        
+                        </Form.Row>
+
 
                       
 
@@ -432,12 +406,12 @@ console.log(this.props.userProfile)
               <div id="test-l-2" className="content">
                     
                       <Form.Row>
-                                <Form.Group as={Col} controlId="formBasicPassword">
+                                <Form.Group as={Col} controlId="">
                           <Form.Label>First Name</Form.Label>
                           <Form.Control required type="text" size="sm" placeholder="" name="receiverFirstName" value={this.state.receiverFirstName} onChange={this.handleChange}/>
                         </Form.Group>
 
-                         <Form.Group as={Col} controlId="formBasicPassword">
+                         <Form.Group as={Col} controlId="">
                           <Form.Label>Last Name</Form.Label>
                           <Form.Control required type="text" size="sm" placeholder="" name="receiverLastName" value={this.state.receiverLastName} onChange={this.handleChange}/>
                         </Form.Group>
@@ -451,13 +425,13 @@ console.log(this.props.userProfile)
 
                     
                        
-                        <Form.Group controlId="formBasicPassword">
+                        <Form.Group controlId="">
                           <Form.Label>Phone</Form.Label>
                           <Form.Control required type="text" size="sm" placeholder="" name="receiverPhone" value={this.state.receiverPhone} onChange={this.handleChange} />
                         </Form.Group>
 
 
-                          <Form.Group controlId="formBasicPassword">
+                          <Form.Group controlId="">
                           <Form.Label>Address</Form.Label>
                           <Form.Control required type="text" size="sm" placeholder="street Address" style={{marginBottom:'10px'}}
                             name="receiverAddress" value={this.state.receiverAddress} onChange={this.handleChange}
@@ -475,7 +449,7 @@ console.log(this.props.userProfile)
                             <Form.Control required size="sm"  name="receiverCity" value={this.state.receiverCity} onChange={this.handleChange}/>
                           </Form.Group>
 
-                          <Form.Group as={Col} controlId="formGridState">
+                          <Form.Group as={Col} controlId="">
                             <Form.Label>Country</Form.Label>
                             <Form.Control required as="select" defaultValue="Choose..." size="sm" name="receiverCountry" value={this.state.receiverCountry} onChange={this.handleChange}>
                               <option>Choose...</option>
@@ -516,17 +490,7 @@ console.log(this.props.userProfile)
              
       <div id="test-l-4" className="content text-center">
 
-<Form.Row style={{justifyContent:'center'}}>
-   <Form.Group as={Col} md={4} lg={4} controlId="name">
-                                    <Form.Label style={{fontWeight:900,fontSize:'24px',color:'purple'}}>Choose courier service</Form.Label>
-                                    <Form.Control required as="select" size="sm" name="courierCompany" value={this.state.courierCompany} onChange={this.handleChange} style={{color:'purple',fontWeight:700}}>
 
-                                    <option>{this.state.courierCompany}</option>
-                              {this._filter(this.state.courierCompany,['FedEx ground','FedEx Air','UPS Ground','UPS Air',"USPS "]).map((s,i)=>(
-                                <option style={{color:'purple',fontWeight:700}} value={`${s}`} key={i}>{s}</option>))}
-                          </Form.Control>
-                                  </Form.Group>
-</Form.Row>
 
               
 
@@ -540,8 +504,7 @@ console.log(this.props.userProfile)
 
 <div style={{display:this.state.finalValidate && this.state.packages.length?'':'none'}}>
 
-               <Row style={{justifyContent:'center'}}><Button  onClick={this.onPayCash}>Pay with Cash    ${this.state.totalCost}</Button></Row>
-                    <Row style={{justifyContent:'center',margin:'20px',fontSize:'20px',fontWeight:700}} >or</Row>
+              {/*no cash option because user will charged per hour.*/}
                  <Row style={{justifyContent:'center'}}>
                    <StripeCheckout
                     
@@ -557,7 +520,7 @@ console.log(this.props.userProfile)
     
     <Button onClick={()=>this.setState({showPaymentModal:true})}   style={{backgroundColor:'purple',border:'none'}}
     >
-      Pay with Card        ${this.state.totalCost}
+      Pay with Card        ${this.state.initialCost}
     </Button>
   </StripeCheckout></Row>
 

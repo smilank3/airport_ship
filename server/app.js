@@ -288,7 +288,7 @@ server.get('/kiosk/personnel',_isKioskClerk,async(req,res)=>{
   app.render(req,res,"/kiosk/_profile",{})
 })
 
-// create package
+// create shipping
 
 server.post('/api/admin/createShipping',async(req,res)=>{
 
@@ -303,7 +303,24 @@ server.post('/api/admin/createShipping',async(req,res)=>{
 })
 
 
-// get all packages based on location
+// create dropoff
+
+server.post('/api/admin/createDropOff',async(req,res)=>{
+
+    try{
+      let package_=await User.createDropOff(req.body);
+  
+  console.log('0-------------------------------------------------')
+  console.log(package_)
+    
+      res.json({status:'ok',trackingid:package_.trackingId})
+    }catch(err){
+      res.json({error:err.message})
+    }
+})
+
+
+// get all packages based on location (shipped)
 
 
 server.post('/api/admin/getPackagesByLocation',async(req,res)=>{
@@ -319,6 +336,57 @@ server.post('/api/admin/getPackagesByLocation',async(req,res)=>{
     res.json({error:err.message})
   }
 })
+
+
+// get all packages based on location (dropOff)
+
+
+server.post('/api/admin/getDropOffPackagesByLocation',async(req,res)=>{
+
+  const {location}=req.body;
+
+  try{
+
+    let packages=await Package.getDropOffPackagesByLocation(location);
+console.log(packages)
+    res.json({status:'ok',packages:packages})
+  }catch(err){
+    res.json({error:err.message})
+  }
+})
+
+// get all package history by email 'user dashoard';(shipping)
+
+server.post('/api/admin/getPackagesByEmail',async(req,res)=>{
+
+  const {email}=req.body;
+  console.log(req.body)
+
+  try{
+
+    let packages=await Package.getPackagesByEmail(email);
+
+    res.json({status:'ok',packages:packages})
+  }catch(err){
+    res.json({error:err.message})
+  }
+})
+// get all package history by email 'user dashoard';(dropOff)
+
+server.post('/api/admin/getDropOffPackagesByEmail',async(req,res)=>{
+
+  const {email}=req.body;
+
+  try{
+
+    let packages=await Package.getDropOffPackagesByEmail(email);
+
+    res.json({status:'ok',packages:packages})
+  }catch(err){
+    res.json({error:err.message})
+  }
+})
+
 
 
 // get shipping status based on tracking id
@@ -344,6 +412,19 @@ server.post('/api/admin/updatePackage',async(req,res)=>{
        let package_=await Package.updatePackage(req.body);
 
        res.json({status:'ok'})
+  }catch(err){
+    res.json({error:err.message})
+  }
+})
+
+
+// update package by kios clerk
+server.post('/api/admin/updateDropOffPackage',async(req,res)=>{
+
+  try{
+       let package_=await Package.updateDropOffPackage(req.body);
+
+       res.json({status:'ok',package_})
   }catch(err){
     res.json({error:err.message})
   }
@@ -511,6 +592,18 @@ server.get('/api/admin/getStaffByLocation', async(req,res)=>{
 
 
 
+server.get('/portal/signup', async(req,res)=>{
+
+
+  app.render(req,res,'/admin/signup',{})
+})
+
+
+server.get('/portal/login', async(req,res)=>{
+
+
+  app.render(req,res,'/admin/login',{})
+})
 
 
 
