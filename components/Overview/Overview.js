@@ -38,7 +38,7 @@ const [data,setData]=useState([]);
 
     const res=await sendRequest('/api/admin/getStaffByLocation',{method:'GET'});
   
-console.log(res)
+
 setData(res.data);
    
   }

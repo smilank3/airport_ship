@@ -20,15 +20,15 @@ if(props.isAuthenticated){
 
 
 
-       style={{fontWeight:700,color:'purple',marginLeft:'10px',background:'',padding:''}}>Dashboard</Nav.Link>
+       style={{fontWeight:700,color:'white',marginLeft:'10px',background:'',padding:''}}>Dashboard</Nav.Link>
 
       <Nav.Link href={(props.userProfile.role==="manager") || (props.userProfile.role==='admin')?"/admin/profile":
       props.userProfile.role==="kiosk clerk"?"/kiosk/personnel":(props.userProfile.role==='staff')?"/staff/profile":'/profile'}
       
 
 
-       style={{fontWeight:700,color:'purple',marginLeft:'10px'}}>Profile</Nav.Link>
-      <Nav.Link eventKey={2} href="/login" style={{fontWeight:700,color:'purple',marginLeft:'10px'}}
+       style={{fontWeight:700,color:'white',marginLeft:'10px'}}>Profile</Nav.Link>
+      <Nav.Link eventKey={2} href="/login" style={{fontWeight:700,color:'white',marginLeft:'10px'}}
 
 
       onClick={()=>logout()}>
@@ -46,7 +46,7 @@ if(props.isAuthenticated){
 				    		
 
 				      <Nav.Link href="/signup" style={{fontWeight:700,color:'',marginLeft:'0px'}}>Create account</Nav.Link>
-				      <Nav.Link eventKey={2} href="/login" style={{fontWeight:600,color:'',marginLeft:'10px'}}>
+				      <Nav.Link eventKey={2} href="/login" style={{fontWeight:600,color:'white',marginLeft:'10px'}}>
 
 				        Login
 				      </Nav.Link>

@@ -10,8 +10,7 @@ import { useRouter } from 'next/router'
 
 const Layout=(props)=>{
 	const router = useRouter()
-	console.log(router)
-	console.log(' Layout')
+	
 
 	return (
 

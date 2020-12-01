@@ -36,7 +36,7 @@ const [package_,setPackage_]=useState(null);
 
     const res=await sendRequest('/api/admin/getDropOffPackagesByLocation',{body:JSON.stringify({location:airportLocation.airportName})});
 
-console.log(res)
+
 
     setTimeout(()=>{
 

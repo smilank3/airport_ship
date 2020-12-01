@@ -48,7 +48,7 @@ const [usageTime,setUsageTime]=useState(0);
 const [pickUpBy,setPickUpBy]=useState('choose...');
 const [pickUpDate,setPickUpDate]=useState(null);
 
-console.log(userProfile)
+
 
 	useEffect(()=>{
 
@@ -60,7 +60,7 @@ console.log(userProfile)
 
     const res=await sendRequest('/api/admin/getDropOffPackagesByLocation',{body:JSON.stringify({location:userProfile.airportLocation.airportName})});
 
-console.log(res)
+
 
     setTimeout(()=>{
 
@@ -169,8 +169,12 @@ if(!history){  // if history is null  show loading...
     /* go to history and filter the match tracking id and show the information*/
 let matchedfirst=history.filter(h=>h.packageId===trackingid)[0];
 
+console.log(matchedfirst)
 // set time usage difference
-setUsageTime(TimeDiff(matchedfirst.stored.date));
+let usageT=matchedfirst.pickUp.usageTime?matchedfirst.pickUp.usageTime:TimeDiff(matchedfirst.stored.date);
+console.log(usageT)
+
+setUsageTime(usageT);
 
 // set date
 setPickUpDate(new Date());
@@ -299,12 +303,12 @@ centered
 
 <h5> After time usage exceeds 362 mins we charge $0.067 per minutes</h5>
 
-<h6 style={{color:'purple'}}>Extra Usage time : {usageTime<=300?
+<h6 style={{color:'purple'}}>Extra Usage time <span style={{color:'black'}}>{usageTime} mins</span> : {usageTime<=300?
   (<Badge variant='success' style={{cursor:'pointer'}}>No Extra charge</Badge>):usageTime<=362?
   (<Badge variant='info' style={{cursor:'pointer'}}>{362-usageTime} minutes</Badge>):
 (<Badge variant='danger' style={{cursor:'pointer'}}>Auctioned Already</Badge>)}  </h6> 
 
-<div  style={{display:usageTime>362?'none':''}}>
+<div  style={{display:usageTime>362 || package_.pickUp.isPickedUp?'none':''}}>
 <h6 style={{color:'purple'}}>Total amount(additional) : <span>$ {usageTime>300?(Number(Number(usageTime-300)*0.067).toFixed(2)):0.0}</span></h6> 
 
 
@@ -327,12 +331,12 @@ let extraCost=usageTime>300?(Number(Number(usageTime-300)*0.067).toFixed(2)):0;
 
      const post={orderId:package_.orderId,data:{date:pickUpDate,isPickedUp:true,pickUpBy,usageTime,finalPayment:Number(Number(package_.stored.initialPayment)+Number(extraCost))}}
 
-     console.log(post)
+
 
      // update order/package
 
     const res=await sendRequest('/api/admin/updateDropOffPackage',{body:JSON.stringify({query:post})});
-    console.log(res)
+   
 
     if(res.error){
       alert(res.error)

@@ -9,7 +9,7 @@ const History=({userProfile})=>{
 
 const [history,setHistory]=useState(null);
 
-console.log(userProfile)
+
 
 	useEffect(()=>{
 
@@ -21,7 +21,7 @@ console.log(userProfile)
 
     const res=await sendRequest('/api/admin/getPackagesByLocation',{body:JSON.stringify({location:userProfile.airportLocation.airportName})});
 
-console.log(res)
+
 
     setTimeout(()=>{
 

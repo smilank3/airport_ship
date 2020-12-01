@@ -209,15 +209,14 @@ onToken= async(token)=>{
       package_.payBy='card'
 
 
-console.log(package_)
+
 
   let res=await sendRequest('/api/admin/createDropOff',{body:JSON.stringify(package_)});
-  console.log(res)
-  if(res.error){
+    if(res.error){
     alert(res.error);
   }else{
     alert('succeed');
-    console.log(res)
+
 
     alert(`Tracking Id : ${res.trackingid}. 
        We will send this Id to customer cell phone.

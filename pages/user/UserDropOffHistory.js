@@ -11,7 +11,7 @@ const UserDropOffHistory=({userProfile})=>{
 
 const [history,setHistory]=useState(null);
 
-console.log(userProfile)
+
 
 	useEffect(()=>{
 
@@ -23,7 +23,7 @@ console.log(userProfile)
 
     const res=await sendRequest('/api/admin/getDropOffPackagesByEmail',{body:JSON.stringify({email:userProfile.email})});
 
-console.log(res)
+
 
     setTimeout(()=>{
 
